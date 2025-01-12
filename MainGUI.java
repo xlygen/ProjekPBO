@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainGUI {
-    private static List<Pengunjung> pengunjungList = new ArrayList<>();
-    private static List<Pemandu> pemanduList = new ArrayList<>();  // Daftar pemandu
-    private static LaporanPendapatan lpd = new LaporanPendapatan();
-    private static List<zonaWisata> zonaList = new ArrayList<>();
+    private static List<Pengunjung> pengunjungList = new ArrayList<>(); // Daftar pengunjung (agregasi)
+    private static List<Pemandu> pemanduList = new ArrayList<>();  // Daftar pemandu (agregasi)
+    private static LaporanPendapatan lpd = new LaporanPendapatan(); // Objek laporan pendapatan (asosiasi)
+    private static List<zonaWisata> zonaList = new ArrayList<>(); // Daftar zona wisata (agregasi)
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Sistem Manajemen Taman Wisata");
@@ -34,13 +34,13 @@ public class MainGUI {
         frame.add(label, "North");
         frame.add(panel, "Center");
 
-        // Menambahkan beberapa pemandu untuk contoh
-        pemanduList.add(new Pemandu(330, "Faisal", "Zona Adventure", "Senin - kamis"));
+        // Menambahkan beberapa pemandu untuk contoh(asosiasi)
+        pemanduList.add(new Pemandu(330, "Faishal", "Zona Adventure", "Senin - kamis"));
         pemanduList.add(new Pemandu(333, "Rindra", "Zona Taman Angrek", "Selasa - Sabtu"));
         pemanduList.add(new Pemandu(335, "Rofiq", "Zona Kebun Binatang", "senin - Minggu"));
         pemanduList.add(new Pemandu(342, "Dimas", "Zona Air Terjun", "Sabtu - Minggu"));
 
-        // Menambahkan Zona List
+        // Menambahkan Zona List (generalisasi)
         zonaList.add(new ZonaAdventure("Zona Adventure", "Tempat petualangan seru", true, 100));
         zonaList.add(new ZonaTamanAnggrek("Zona Taman Anggrek", "Koleksi bunga anggrek indah", true, 50));
         zonaList.add(new ZonaKebunBinatang("Zona Kebun Binatang", "Melihat hewan eksotis", true, 75));
@@ -70,11 +70,12 @@ public class MainGUI {
                         return;
                     }
 
-                    // Pilihan tiket
+                    // Pilihan tiket pengunjung 
                     String[] ticketOptions = {"Reguler", "Premium"};
                     String tipeTiket = (String) JOptionPane.showInputDialog(frame, "Pilih Tipe Tiket:",
                             "Tipe Tiket", JOptionPane.QUESTION_MESSAGE, null, ticketOptions, ticketOptions[0]);
-
+                    
+                    //generalisasi
                     Tiket tiket;
                     if ("Reguler".equalsIgnoreCase(tipeTiket)) {
                         tiket = new tiketReguler();
@@ -96,7 +97,7 @@ public class MainGUI {
             }
         });
 
-        //Laporan Pendapatan
+        //Laporan Pendapatan 
         laporanPendapatan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,7 +110,7 @@ public class MainGUI {
             }
         });
 
-        // Pemandu Tersedia
+        // Pemandu Tersedia 
         pemanduTersedia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +126,7 @@ public class MainGUI {
             }
         });
 
-        //Fasilitas
+        //Fasilitas 
         Fasilitas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,7 +142,7 @@ public class MainGUI {
             }
         });
 
-        //Zona Wisata
+        //Zona Wisata 
         zonaWisata.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
