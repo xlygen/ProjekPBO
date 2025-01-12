@@ -26,5 +26,4 @@ public class Pengunjung {
     public int getUmur() {
         return umur;
     }
-
 }
