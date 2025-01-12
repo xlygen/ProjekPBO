@@ -15,6 +15,4 @@ public class Pemandu extends User {
     public String getJadwal() {
         return Jadwal;
     }
-
-
 }
